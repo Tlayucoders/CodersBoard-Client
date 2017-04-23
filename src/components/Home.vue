@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<h1>{{ msg }}</h1>
+		<h1 v-on:click="greet">{{ msg }}</h1>
 	</div>
 </template>
 
