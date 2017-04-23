@@ -46,7 +46,11 @@ export default {
     loginWithCredentials: function () {
       this.$http.post('login', this.credential).then(response => {
         // Success callback
-        console.log('Request done ' + response.body)
+        if (response.status === 200) {
+          var data = response.body.data
+          this.$localStorage.set('token', data.access_token)
+          console.log('token from server =>' + this.$localStorage.get('token'))
+        }
       }, response => {
         // error callback
         console.log('Request error ' + response.status + ' ' + response.body)
