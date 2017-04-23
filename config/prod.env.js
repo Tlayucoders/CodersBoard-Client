@@ -1,3 +1,5 @@
 module.exports = {
-  NODE_ENV: '"production"'
+    APP_NAME: 'CodersBoard',
+    NODE_ENV: '"production"',
+    PORT: 8080
 }
