@@ -60,7 +60,7 @@ export default {
       this.$http.post('register', this.account).then(response => {
         // Success callback
         if (response.status === 200) {
-          var data = response.body.data
+          // var data = response.body.data
         }
         console.log('Request done ' + response.body)
       }, response => {

@@ -8,11 +8,12 @@ import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
+
 Vue.use(Vuetify)
 Vue.use(VueResource)
 Vue.use(VueLocalStorage)
-Vue.http.options.root = 'http://45.55.205.123:3124'
 
+Vue.http.options.root = 'http://45.55.205.123:3124'
 Vue.http.interceptors.push(function (request, next) {
   // modify headers
   request.headers.set('x-access-tone', this.$localStorage.get('token'))
@@ -20,6 +21,16 @@ Vue.http.interceptors.push(function (request, next) {
   // continue to next interceptor
   next()
 })
+
+/*
+router.beforeEach((to, from, next)=>{
+  var localStorage = this.$localStorage
+  if (localStorage == null) {
+    console.log('local storage is null')
+  } else {
+
+  }
+}) */
 
 /* eslint-disable no-new */
 new Vue({

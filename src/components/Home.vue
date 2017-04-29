@@ -1,6 +1,8 @@
 <template>
 	<div class="home">
-		<h1 v-on:click="onInit">{{ msg }}</h1>
+		<h2 v-on:click="onInit">
+      {{ msg }}
+    </h2>
 	</div>
 </template>
 
@@ -9,7 +11,12 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Home :)'
+      msg: 'no auth :)'
+    }
+  },
+  created: function () {
+    if (this.$localStorage.get('token') !== null) {
+      this.msg = 'you are login :)'
     }
   },
   methods: {
@@ -17,6 +24,9 @@ export default {
       console.log('On init')
       var x = this.$localStorage.get('token')
       console.log(x)
+    },
+    beforeCreated: function () {
+      console.log('beforeCreated')
     }
   }
 }
