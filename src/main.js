@@ -8,18 +8,37 @@ import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
+
 Vue.use(Vuetify)
 Vue.use(VueResource)
 Vue.use(VueLocalStorage)
-Vue.http.options.root = 'http://45.55.205.123:3124'
 
+// url root
+Vue.http.options.root = 'http://127.0.0.1:3030'
+
+// set tokens in headers
 Vue.http.interceptors.push(function (request, next) {
-  // modify headers
   request.headers.set('x-access-tone', this.$localStorage.get('token'))
-  // request.headers.set('Authorization', 'Bearer TOKEN');
-  // continue to next interceptor
   next()
 })
+
+// protected routes
+router.beforeEach((to, from, next) => {
+  // paths that don't need auth
+  if (to.path === '/login' || to.path === '/register' || to.path === '/') {
+    if (localStorage.token != null) {
+      next('/home')
+    }
+  } else {
+    if (localStorage.token == null) {
+      console.log('ir a login')
+      next('/login')
+    }
+  }
+  next()
+})
+
+export const eventBus = new Vue()
 
 /* eslint-disable no-new */
 new Vue({

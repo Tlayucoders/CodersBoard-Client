@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { eventBus } from '../main'
+
 export default {
   name: 'login',
   data () {
@@ -47,9 +49,7 @@ export default {
       this.$http.post('login', this.credential).then(response => {
         // Success callback
         if (response.status === 200) {
-          var data = response.body.data
-          this.$localStorage.set('token', data.access_token)
-          console.log('token from server =>' + this.$localStorage.get('token'))
+          eventBus.$emit('authSuccess', response.body.data)
         }
       }, response => {
         // error callback
