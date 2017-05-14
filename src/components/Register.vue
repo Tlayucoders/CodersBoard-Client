@@ -59,10 +59,10 @@ export default {
     registerAccount: function () {
       this.$http.post('register', this.account).then(response => {
         // Success callback
-        if (response.status === 200) {
-          // var data = response.body.data
+        if (response.status === 201) {
+          this.$router.push('/login')
         }
-        console.log('Request done ' + response.body)
+        console.log('Request done ' + response.body + ' ' + response.status)
       }, response => {
         // error callback
         console.log('Request error ' + response.status + ' ' + response.body)
